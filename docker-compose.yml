@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db:    
+    container_name: db_companies
+    image: postgres:15.2
+    restart: always
+    volumes:
+      - ./sql/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    environment:
+      - POSTGRES_DB=db_companies
+      - POSTGRES_USER=rminaya
+      - POSTGRES_PASSWORD=cibertec
+    ports:
+      - 5433:5432
