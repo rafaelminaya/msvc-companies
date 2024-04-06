@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: companies-crud
+  datasource:
+    # Asignamos el timeout a 20 000 milisegundos y el pool size de 5
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 20000
+    url: jdbc:postgresql://localhost:5433/db_companies
+    username: rminaya
+    password: cibertec
+  # Configuracion para evitar el warning de "spring.jpa.open-in-view to disable this warning" en el terminal,
+  # el cual al deshabilitarlo permite manejar excepcinoes de inicializacion perezosa como "LazyInitializationException" de forma mas efectiva
+  jpa:
+    open-in-view: false
+server:
+  servlet:
+    context-path: /companies-crud
+  # Con el puerto en "0" genera un puerto aleatorio para la instancia ejecutada. Ejemplo 49725
+  # Opcion 1:
+  ##port: 0
+  # Opcion 2:
+  port: ${PORT:0}
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+eureka:
+  # Personalizamos el nombre de la instancia en Eureka, visible en el dashboard web y que normalmente es autogenerada
+  # ${spring.application.name} : Invoca al nombre del microservicio, asignado arriba
+  # {random.value} : Propio de spring para asignar una cadena alfanumerica aleatoria
+  # Cada instancia quedara por ejemplo algo asi como: companies-crud:6300735079e1baeb6475e6c896c6ed0a
+  instance:
+    instance-id: "${spring.application.name}:${random.value}"
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

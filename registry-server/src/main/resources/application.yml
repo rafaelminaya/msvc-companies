@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: registry-server
+# Puerto recomendado para "eureka server"
+server:
+  port: 8761
+# Configuracion para evitar auto-registrar a eureka como un microservicio cliente de "eureka server"
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
