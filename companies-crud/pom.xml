@@ -65,6 +65,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!-- Dependencia de para registrar a este microservicio como cliente del "servidor de configuraciones" -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
     </dependencies>
     <!-- Sirve para no tener errores en las dependencias, para no conflictuar en las dependencias de spring y que sean compatibles -->
     <dependencyManagement>

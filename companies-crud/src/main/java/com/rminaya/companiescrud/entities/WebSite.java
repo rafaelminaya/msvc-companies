@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class WebSite implements Serializable {
+public class WebSite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

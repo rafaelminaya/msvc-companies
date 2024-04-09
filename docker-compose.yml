@@ -13,3 +13,29 @@ services:
       - POSTGRES_PASSWORD=cibertec
     ports:
       - 5433:5432
+  db-qa:    
+    container_name: db_companies_qa
+    image: postgres:15.2
+    restart: always
+    volumes:
+      - ./sql/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    environment:
+      - POSTGRES_DB=db_companies_qa
+      - POSTGRES_USER=rminaya-qa
+      - POSTGRES_PASSWORD=Y2liZXJ0ZWM=
+    ports:
+      - 5434:5432
+  db-prod:    
+    container_name: db_companies_prod
+    image: postgres:15.2
+    restart: always
+    volumes:
+      - ./sql/create_schema.sql:/docker-entrypoint-initdb.d/create_schema.sql
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    environment:
+      - POSTGRES_DB=db_companies_prod
+      - POSTGRES_USER=rminaya-prod
+      - POSTGRES_PASSWORD=Y2liZXJ0ZWM=
+    ports:
+      - 5435:5432         

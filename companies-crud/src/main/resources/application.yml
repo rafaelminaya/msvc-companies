@@ -1,14 +1,20 @@
 spring:
-  application:
-    name: companies-crud
+  # Por medio de ${} usamos los valores de cada propiedad del repositorio de remoto, con el profile "default" en este caso.
   datasource:
+    url: ${db.url}
+    username: ${db.username}
+    password: ${db.password}
     # Asignamos el timeout a 20 000 milisegundos y el pool size de 5
     hikari:
-      maximum-pool-size: 5
-      connection-timeout: 20000
-    url: jdbc:postgresql://localhost:5433/db_companies
-    username: rminaya
-    password: cibertec
+      maximum-pool-size: ${db..maximum-pool-size}
+      connection-timeout: ${db.connection-timeout}
+  application:
+    name: companies-crud
+  profiles:
+    active: default # Seleccionamos al "profile" de "default"
+  config:
+  # Indicamos la ruta de donde se importaran las configuraciones en caso el "servidor de configuraciones" falle de forma remota
+    import: "optional:configserver:http://localhost:7777"
   # Configuracion para evitar el warning de "spring.jpa.open-in-view to disable this warning" en el terminal,
   # el cual al deshabilitarlo permite manejar excepcinoes de inicializacion perezosa como "LazyInitializationException" de forma mas efectiva
   jpa:
@@ -20,7 +26,8 @@ server:
   # Opcion 1:
   ##port: 0
   # Opcion 2:
-  port: ${PORT:0}
+  ##port: ${PORT:0}
+  port: 8081
 logging:
   level:
     org:
@@ -38,5 +45,6 @@ eureka:
   instance:
     instance-id: "${spring.application.name}:${random.value}"
   client:
+    # Configuracion (obligatorio en caso el servidor eureka se encuentre en otra maquina con IPs distintas) indicando cual es nuestro servidor eureka
     service-url:
       defaultZone: http://localhost:8761/eureka/
