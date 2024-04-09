@@ -14,9 +14,9 @@ spring:
           default-label: main # Indicamos que "main" sera la rama por defecto a conectarse
           clone-on-start: true # Indicamos que va a clonar el "repositorio remoto" una vez ejecutado este proyecto. Por defecto es false
           # 1 Opcion : Usando credenciales usuario y password(token de GitHub)
-          username: rafaelminaya
+          #username: rafaelminaya
           #password: AQUI_IRIA_EL_TOKEN_DEL_GITHUB
-          password: ${GIT_TOKEN}
+          #password: ${GIT_TOKEN}
           # 2 Opcion : Usando el SSH-key de GitHub
           ignore-local-ssh-settings: true # cambiaos a true para ignorar los seetings del ssh
           host-key-algorithm: ecdsa-sha2-nistp256 # Debemos indicar el nombre del algoritmo que usamos al generar el SSH
