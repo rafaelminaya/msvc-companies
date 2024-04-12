@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: eureka-on
+server:
+  port: 4040
+eureka:
+  instance:
+    instance-id: "${spring.application.name}:${random.value}"
+  client:
+    # Por defecto es "true".
+    # Si es false, permite a esta microservicio no conocer a los otros microservicio registrados en "eureka server".
+    # Comprobaremos su funcionamiento al activar el perfil de "eureka-on" ya que este enruta hacia los nombres de los microservicios.
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
