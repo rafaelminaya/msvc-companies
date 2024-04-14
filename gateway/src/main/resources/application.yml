@@ -2,7 +2,9 @@ spring:
   application:
     name: gateway
   profiles:
-    active: eureka-on
+    # Estos profile fueron configurados en la clase "GatewayConfig"
+    # Las 3 alternativas son: eureka-off, eureka-on, eureka-cb
+    active: eureka-cb
 server:
   port: 4040
 eureka:

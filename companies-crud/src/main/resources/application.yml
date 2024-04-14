@@ -26,8 +26,8 @@ server:
   # Opcion 1:
   ##port: 0
   # Opcion 2:
-  port: ${PORT:0}
-  ##port: 8081
+  ##port: ${PORT:0}
+  port: 8081
 logging:
   level:
     org:

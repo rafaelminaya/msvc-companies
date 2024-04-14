@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(path = "/company")
@@ -22,7 +23,25 @@ public class CompanyController {
 
     @Operation(summary = "get a company given a company name")  // Anotación de swagger
     @GetMapping(path = "/{name}")
-    public ResponseEntity<Company> get(@PathVariable String name) {
+    public ResponseEntity<Company> get(@PathVariable String name) throws InterruptedException {
+        /*
+         * 1 Simulación: Lanzamiento de excepción
+         * Lanzaremos una excepción para cuando el name sea igual a "Error"
+         */
+        if (name.equals("Error")) {
+            throw new IllegalStateException("Company no encontrada.");
+        }
+
+        /*
+         * 2° Simulación: Lanzamiento de un timeout
+         * Forzamos un timeout de 5 segundos cuando el name sea "Facebook"
+         */
+
+        if (name.equals("Facebook")) {
+            //  Equivalente a : Thread.sleep(5000L);
+            TimeUnit.SECONDS.sleep(5L);
+        }
+
         // El log será importante para la trazabilidad que veremos más adelante
         log.info("GET: company {}", name);
         return ResponseEntity.ok(this.companyService.readByname(name));
